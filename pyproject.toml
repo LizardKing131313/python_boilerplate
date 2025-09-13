@@ -66,7 +66,7 @@ warn_redundant_casts = true
 warn_unused_configs = true
 strict_optional = false
 disallow_untyped_defs = false
-exclude = "(tests/|^NUL$)"
+exclude = "(tests/)"
 cache_dir = ".mypy_cache"
 
 [[tool.mypy.overrides]]

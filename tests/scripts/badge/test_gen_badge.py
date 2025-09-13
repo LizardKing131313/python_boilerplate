@@ -73,7 +73,7 @@ def test_gen_badge_success(tmp_path: Path, capsys: CaptureFixture) -> None:
     badge = tmp_path / "badges" / "coverage.svg"
     assert badge.exists()
     # наш фейковый writer пишет "coverage:<value>"
-    assert badge.read_text(encoding="utf-8") == "coverage:87.6"
+    assert badge.read_text(encoding="utf-8") == "Coverage:87.6"
 
     # проверяем stdout
     out = capsys.readouterr().out
@@ -86,7 +86,7 @@ def test_gen_badge_missing_or_broken_xml(tmp_path: Path, capsys: CaptureFixture)
 
     badge = tmp_path / "badges" / "coverage.svg"
     assert badge.exists()
-    assert badge.read_text(encoding="utf-8") == "coverage:0.0"
+    assert badge.read_text(encoding="utf-8") == "Coverage:0.0"
 
     out = capsys.readouterr().out
     assert "Failed to parse coverage.xml" in out

@@ -22,7 +22,7 @@ coverage = round(coverage, 1)
 
 thresholds = {50: "red", 75: "orange", 90: "green"}
 
-badge = anybadge.Badge("coverage", coverage, thresholds=thresholds)
+badge = anybadge.Badge("Coverage", coverage, thresholds=thresholds)
 badge.write_badge(badge_file, overwrite=True)
 
 print(f"Generated badge at badges/coverage.svg (coverage: {coverage:.1f}%)")
