@@ -99,6 +99,6 @@ make help
 ```bash
 git clone https://github.com/LizardKing131313/python_boilerplate my_new_app
 cd my_new_app
-rm -rf .git
+Remove-Item -Recurse -Force .git
 git init
 ```
