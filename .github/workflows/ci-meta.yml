@@ -93,7 +93,7 @@ jobs:
 
   codeowners:
     name: Validate CODEOWNERS
-    if: hashFiles('.github/CODEOWNERS') != ''
+    if: ${{ exists('.github/CODEOWNERS') }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
