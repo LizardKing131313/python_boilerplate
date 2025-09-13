@@ -46,7 +46,7 @@ jobs:
         run: |
           ~/go/bin/actionlint -color \
           -shellcheck="$(command -v shellcheck)" \
-          .github/workflows/*.yml .github/workflows/*.yaml
+          .github/workflows/*.yml
 
   yamllint:
     name: Yamllint
