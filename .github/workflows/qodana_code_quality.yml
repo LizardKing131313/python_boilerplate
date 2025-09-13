@@ -20,34 +20,43 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ВАЖНО: не используем --image, задаём линтер по идентификатору
+      # ВАЖНО: args через запятые, не пробелы
       - name: Qodana Scan (Community)
         id: qscan
         uses: JetBrains/qodana-action@v2025.2
         with:
-          # Явно определяем лinter ID вместо docker image
           args: >-
-            --linter=qodana-python-community
-            --within-docker=true
-            --results-dir=qodana
+            --linter,qodana-python-community,
+            --within-docker,true,
+            --results-dir,qodana
           use-caches: true
           pr-mode: false
 
-      # Диагностика — оставить на первых прогонах
+      # Диагностика — можно потом удалить
       - name: List Qodana outputs (debug)
         if: ${{ always() }}
         run: |
-          echo "=== Root dir ==="
-          ls -lah
-          echo "=== qodana ==="
-          ls -lah qodana || true
-          echo "=== qodana/results ==="
-          ls -lah qodana/results || true
+          echo "=== Root dir ==="; ls -lah || true
+          echo "=== qodana ==="; ls -lah qodana || true
+          echo "=== qodana/results ==="; ls -lah qodana/results || true
+
+      # Находим, какой SARIF сгенерился, и кладём путь в env
+      - name: Resolve SARIF path
+        if: ${{ always() }}
+        run: |
+          if [ -f "qodana/results/qodana.sarif" ]; then
+            echo "SARIF=qodana/results/qodana.sarif" >> "$GITHUB_ENV"
+          elif [ -f "qodana/results/qodana.sarif.json" ]; then
+            echo "SARIF=qodana/results/qodana.sarif.json" >> "$GITHUB_ENV"
+          else
+            echo "SARIF=" >> "$GITHUB_ENV"
+          fi
+          echo "Resolved SARIF: ${SARIF:-<none>}"
 
       - name: Upload SARIF from Qodana
-        if: ${{ always() && hashFiles('qodana/results/qodana.sarif') != '' }}
+        if: ${{ always() && env.SARIF != '' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: qodana/results/qodana.sarif
+          sarif_file: ${{ env.SARIF }}
           category: qodana
           wait-for-processing: true
