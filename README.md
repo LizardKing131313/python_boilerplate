@@ -85,13 +85,3 @@ make help
   ```
 - Husky нет — за «pre-commit» отвечают хуки: `pre-commit install`.
 - Для проверки качества на CI можно использовать уже готовые воркфлоу (добавь их в `.github/workflows/`).
-
-## Как добавить CI / бейджи (опционально)
-
-1. Создай воркфлоу `.github/workflows/ci.yml` (линт+типы+тесты).
-2. (Опционально) Подними Qodana: `.github/workflows/qodana_code_quality.yml` + проверь `qodana.yaml`.
-3. Обнови ссылки на бейджи в шапке README.
-
-## Лицензия
-
-Укажи свою лицензию (`LICENSE`), или удали этот раздел.
