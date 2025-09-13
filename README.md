@@ -4,7 +4,9 @@
 [![Qodana](https://github.com/LizardKing131313/python_boilerplate/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/LizardKing131313/python_boilerplate/actions/workflows/qodana_code_quality.yml)
 ![Coverage](badges/coverage.svg)
 
-Быстрый стартовый шаблон для Python-проектов: из коробки структура каталогов, Makefile-команды, типизация, тесты и git-хуки. Подходит для pet-/prod-мини-сервисов и библиотек.
+Быстрый стартовый шаблон для Python-проектов: из коробки структура каталогов,
+Makefile-команды, типизация, тесты и git-хуки.
+Подходит для pet-/prod-мини-сервисов и библиотек.
 
 > TL;DR:
 > ```bash
@@ -24,7 +26,9 @@
 - **Git-хуки**: `pre-commit` (форматтеры/линтеры/тривиальные проверки).
 - **Статанализ**: JetBrains Qodana (конфиг `qodana.yaml`).
 
-> Примечание: конкретные линтеры/форматтеры включаются через `pyproject.toml` и `.pre-commit-config.yaml`. При необходимости донастрой в них рулы и версии.
+> Примечание: конкретные линтеры/форматтеры включаются через
+> `pyproject.toml` и `.pre-commit-config.yaml`.
+> При необходимости донастрой в них рулы и версии.
 
 ## Быстрый старт
 
@@ -48,7 +52,8 @@ make help
 
 ## Основные команды Makefile
 
-> Посмотри полный список: `make help`. Ниже — типовые цели (могут отличаться от твоей версии Makefile):
+> Посмотри полный список: `make help`.
+> Ниже — типовые цели (могут отличаться от твоей версии Makefile):
 
 - `make install` — установка зависимостей (runtime).
 - `make dev` — установка dev-зависимостей (линтеры/тесты/типы).
@@ -61,7 +66,7 @@ make help
 
 ## Структура каталогов
 
-```
+```ignorelang
 .
 ├─ badges/                  # svg/png бейджи (по желанию)
 ├─ makefiles/               # разнесённые таргеты (инклюдит главный Makefile)
@@ -83,4 +88,5 @@ make help
   make format lint typecheck test
   ```
 - Husky нет — за «pre-commit» отвечают хуки: `pre-commit install`.
-- Для проверки качества на CI можно использовать уже готовые воркфлоу (добавь их в `.github/workflows/`).
+- Для проверки качества на CI можно использовать
+  уже готовые воркфлоу (добавь их в `.github/workflows/`).
