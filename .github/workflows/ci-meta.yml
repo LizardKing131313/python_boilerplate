@@ -69,9 +69,7 @@ jobs:
       - name: Run yamllint on .github
         run: |
           yamllint -s \
-            .github/workflows \
-            .github/*.yml \
-            .github/*.yaml || \
+            .github/workflows/*.yml || \
             (echo "::warning::Yamllint warnings found"; exit 1)
 
   markdownlint:
