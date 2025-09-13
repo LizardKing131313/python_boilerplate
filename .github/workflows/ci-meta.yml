@@ -151,7 +151,7 @@ jobs:
           go-version: "1.22"
 
       - name: Install gitleaks (no GitHub API)
-        run: go install github.com/zricethezav/gitleaks/v8
+        run: go install github.com/zricethezav/gitleaks/v8@latest
 
       - name: Run gitleaks (non-blocking)
         run: |
