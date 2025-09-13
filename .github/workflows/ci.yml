@@ -3,7 +3,7 @@ name: CI
 
 "on":
   push:
-    branches: [ "**" ]
+    branches: ["**"]
   pull_request:
 
 concurrency:
@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.11" ]
+        python-version: ["3.11"]
 
     steps:
       - name: Checkout
@@ -60,7 +60,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .mypy_cache
-          key: mypy-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'mypy.ini', '.mypy.ini', '**/*.pyi') }}
+          key: mypy-${{ runner.os }}-py${{ matrix.python-version }}-
+            ${{ hashFiles('pyproject.toml', 'mypy.ini', '.mypy.ini', '**/*.pyi') }}
           restore-keys: |
             mypy-${{ runner.os }}-py${{ matrix.python-version }}-
             mypy-${{ runner.os }}-

@@ -128,7 +128,10 @@ jobs:
 
       - name: CODEOWNERS missing (notice)
         if: ${{ steps.codeowners.outputs.present == 'false' }}
-        run: echo "::notice title=CODEOWNERS not found::.github/CODEOWNERS is missing. Skipping validation."
+        run: >
+          echo "::notice title=CODEOWNERS not found::
+          .github/CODEOWNERS is missing.
+          Skipping validation."
 
   # 6) Secrets scan (non-blocking): gitleaks с SARIF + артефактом
   gitleaks:
@@ -160,7 +163,7 @@ jobs:
             --verbose \
             --report-format sarif \
             --report-path gitleaks.sarif \
-            || (echo "::warning::Potential secrets found (non-blocking). See SARIF report."; true)
+            || (echo "::warning::Secrets found. See SARIF report."; true)
 
       - name: Upload SARIF to GitHub Code Scanning
         if: always()
