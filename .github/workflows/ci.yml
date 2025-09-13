@@ -49,10 +49,6 @@ jobs:
           pip -V
           pip list
 
-      - name: Compile locales (all bots)
-        run: |
-          python scripts/compile_locales.py --all
-
       - name: Ruff (lint)
         run: ruff check .
 
