@@ -8,14 +8,14 @@
 Makefile-команды, типизация, тесты и git-хуки.
 Подходит для pet-/prod-мини-сервисов и библиотек.
 
-> TL;DR:
-> ```bash
-> python -m venv .venv
-> . .venv/bin/activate  # Windows: .venv\Scripts\activate
-> pip install -r requirements-dev.txt
-> pre-commit install
-> make help
-> ```
+ TL;DR:
+```bash
+python -m venv .venv
+.venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements-dev.txt
+pre-commit install
+make help
+```
 
 ## Что внутри
 
