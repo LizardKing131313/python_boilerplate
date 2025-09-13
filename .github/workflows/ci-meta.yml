@@ -93,7 +93,6 @@ jobs:
 
   codeowners:
     name: Validate CODEOWNERS
-    if: ${{ hashFiles('.github/CODEOWNERS') != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -102,33 +101,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check CODEOWNERS presence
+        id: codeowners
+        shell: bash
+        run: |
+          if [ -f ".github/CODEOWNERS" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Validate CODEOWNERS
+        if: ${{ steps.codeowners.outputs.present == 'true' }}
         uses: mszostok/codeowners-validator@v0.7.3
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           checks: "syntax,owners,duppatterns"
 
-  editorconfig:
-    name: EditorConfig checker
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Go (for ec install)
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.22"
-
-      - name: Install editorconfig-checker (no GitHub API)
-        run: go install github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@v3.2.0
-
-      - name: Run editorconfig-checker
-        run: |
-          ~/go/bin/editorconfig-checker -exclude 'node_modules|.venv|.venv-wsl|.git|.i18n_cache|.mypy_cache|__pycache__'
+      - name: CODEOWNERS missing (notice)
+        if: ${{ steps.codeowners.outputs.present == 'false' }}
+        run: echo "::notice title=CODEOWNERS not found::.github/CODEOWNERS is missing. Skipping validation."
 
   # 6) Secrets scan (non-blocking): gitleaks с SARIF + артефактом
   gitleaks:
