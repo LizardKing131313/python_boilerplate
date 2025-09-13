@@ -1,6 +1,7 @@
+---
 name: CI Meta (workflows & repo hygiene)
 
-on:
+"on":
   push:
     paths:
       - ".github/**"
@@ -43,7 +44,8 @@ jobs:
 
       - name: Run actionlint (+shellcheck)
         run: |
-          ~/go/bin/actionlint -color -shellcheck="$(command -v shellcheck)" .github/workflows
+          ~/go/bin/actionlint -color \
+          -shellcheck="$(command -v shellcheck)" .github/workflows
 
   yamllint:
     name: Yamllint
@@ -67,7 +69,9 @@ jobs:
         run: |
           yamllint -s \
             .github/workflows \
-            .github/*.yml .github/*.yaml || (echo "::warning::Yamllint warnings found"; exit 1)
+            .github/*.yml \
+            .github/*.yaml || \
+            (echo "::warning::Yamllint warnings found"; exit 1)
 
   markdownlint:
     name: Markdownlint
@@ -89,7 +93,10 @@ jobs:
 
       - name: Run markdownlint
         run: |
-          markdownlint-cli2 "**/*.md" "#node_modules" "#.venv" ".venv-wsl" "#.git" "#.i18n_cache" || (echo "::warning::Markdownlint issues found"; exit 1)
+          markdownlint-cli2 "**/*.md" \
+          "#node_modules" "#.venv" ".venv-wsl" "#.git" \
+          "#.i18n_cache" || \
+          (echo "::warning::Markdownlint issues found"; exit 1)
 
   codeowners:
     name: Validate CODEOWNERS
