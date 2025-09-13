@@ -93,3 +93,12 @@ make help
 - Husky нет — за «pre-commit» отвечают хуки: `pre-commit install`.
 - Для проверки качества на CI можно использовать
   уже готовые воркфлоу (добавь их в `.github/workflows/`).
+
+## Создание проектов
+
+```bash
+git clone https://github.com/LizardKing131313/python_boilerplate my_new_app
+cd my_new_app
+rm -rf .git
+git init
+```
