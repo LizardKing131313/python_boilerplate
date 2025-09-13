@@ -9,6 +9,7 @@ Makefile-команды, типизация, тесты и git-хуки.
 Подходит для pet-/prod-мини-сервисов и библиотек.
 
  TL;DR:
+
 ```bash
 python -m venv .venv
 .venv/bin/activate  # Windows: .venv\Scripts\activate
@@ -84,9 +85,11 @@ make help
 
 - Пиши код с **type hints** (PEP 484). Это облегчает жизнь mypy и IDE.
 - Перед пушем всегда прогоняй:
+
   ```bash
   make format lint typecheck test
   ```
+
 - Husky нет — за «pre-commit» отвечают хуки: `pre-commit install`.
 - Для проверки качества на CI можно использовать
   уже готовые воркфлоу (добавь их в `.github/workflows/`).
