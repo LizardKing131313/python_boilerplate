@@ -24,7 +24,7 @@ format:
 
 .PHONY: typecheck
 typecheck:
-	$(MYPY) .
+	$(MYPY) "--config-file=pyproject.toml"
 
 .PHONY: test
 test:
